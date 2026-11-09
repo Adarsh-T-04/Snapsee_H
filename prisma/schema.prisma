@@ -1,0 +1,208 @@
+// Prisma Schema for Snapsee Digital Advertising Agency
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  SUPERADMIN
+  ADMIN
+  MANAGER
+  TEAM_MEMBER
+}
+
+enum EnquiryStatus {
+  NEW
+  CONTACTED
+  MEETING_SCHEDULED
+  PROPOSAL_SENT
+  NEGOTIATION
+  CONVERTED
+  REJECTED
+}
+
+enum ClientStatus {
+  ONBOARDING
+  ACTIVE
+  PAUSED
+  COMPLETED
+}
+
+model User {
+  id           String        @id @default(cuid())
+  name         String
+  email        String        @unique
+  passwordHash String
+  role         Role          @default(ADMIN)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  assignedEnquiries Enquiry[]
+  notes        InternalNote[]
+  activityLogs ActivityLog[]
+}
+
+model Service {
+  id           String   @id @default(cuid())
+  slug         String   @unique
+  title        String
+  shortDesc    String
+  fullDesc     String
+  icon         String   // Lucide icon key
+  benefits     String   // JSON stringified array of benefits
+  deliverables String   // JSON stringified array of deliverables
+  process      String   // JSON stringified array of process steps
+  badge        String?  // e.g. "Most Popular", "High ROI"
+  displayOrder Int      @default(0)
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model PricingPlan {
+  id           String        @id @default(cuid())
+  name         String
+  slug         String        @unique
+  price        Int           // e.g. 9999, 19999, 39999
+  billingCycle String        @default("monthly")
+  tagline      String
+  targetAudience String
+  isPopular    Boolean       @default(false)
+  displayOrder Int           @default(0)
+  isActive     Boolean       @default(true)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  features     PlanFeature[]
+}
+
+model PlanFeature {
+  id           String      @id @default(cuid())
+  planId       String
+  plan         PricingPlan @relation(fields: [planId], references: [id], onDelete: Cascade)
+  featureText  String
+  isIncluded   Boolean     @default(true)
+  displayOrder Int         @default(0)
+}
+
+model Enquiry {
+  id               String         @id // e.g. "ENQ-2026-0814"
+  fullName         String
+  businessName     String
+  email            String
+  phone            String
+  websiteUrl       String?
+  industry         String
+  servicesRequired String         // JSON array or comma separated
+  interestedPlan   String?        // e.g. "Growth Plan"
+  monthlyBudget    String         // e.g. "₹50,000 - ₹1,00,000"
+  projectDetails   String
+  preferredContact String         @default("whatsapp") // "whatsapp" | "email" | "phone"
+  status           EnquiryStatus  @default(NEW)
+  assignedToId     String?
+  assignedTo       User?          @relation(fields: [assignedToId], references: [id])
+  leadSource       String         @default("Website Organic")
+  ipAddress        String?
+  userAgent        String?
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  notes            InternalNote[]
+}
+
+model InternalNote {
+  id        String   @id @default(cuid())
+  enquiryId String
+  enquiry   Enquiry  @relation(fields: [enquiryId], references: [id], onDelete: Cascade)
+  authorId  String?
+  author    User?    @relation(fields: [authorId], references: [id])
+  authorName String
+  content   String
+  createdAt DateTime @default(now())
+}
+
+model Client {
+  id              String       @id @default(cuid())
+  name            String
+  company         String
+  email           String
+  phone           String
+  website         String?
+  packageName     String
+  monthlyRetainer Int          @default(0)
+  status          ClientStatus @default(ONBOARDING)
+  joinedAt        DateTime     @default(now())
+  notes           String?
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+}
+
+model Project {
+  id             String   @id @default(cuid())
+  title          String
+  slug           String   @unique
+  clientName     String
+  category       String   // e.g. "Meta Ads", "Performance Marketing", "Brand Identity"
+  objective      String
+  creativeWork   String   // Detailed description of work done
+  resultsMetrics String   // JSON stringified array of { metric: "+240%", label: "ROAS Increase" }
+  caseStudy      String?  // Rich summary
+  imageUrl       String
+  isFeatured     Boolean  @default(false)
+  isDemo         Boolean  @default(true) // Clearly flagged demo vs real
+  displayOrder   Int      @default(0)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model Testimonial {
+  id           String   @id @default(cuid())
+  clientName   String
+  designation  String
+  company      String
+  avatarUrl    String?
+  rating       Int      @default(5)
+  feedback     String
+  resultsTag   String?  // e.g. "3.8x ROAS Achieved"
+  isFeatured   Boolean  @default(true)
+  displayOrder Int      @default(0)
+  createdAt    DateTime @default(now())
+}
+
+model FAQ {
+  id           String   @id @default(cuid())
+  question     String
+  answer       String
+  category     String   @default("General") // "General" | "Pricing" | "Services" | "Onboarding"
+  displayOrder Int      @default(0)
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model NewsletterSubscriber {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  isActive     Boolean  @default(true)
+  subscribedAt DateTime @default(now())
+}
+
+model ActivityLog {
+  id          String   @id @default(cuid())
+  action      String   // e.g. "ENQUIRY_STATUS_UPDATED", "CLIENT_CREATED"
+  entity      String   // e.g. "Enquiry", "PricingPlan"
+  entityId    String?
+  details     String?
+  performedById String?
+  performedBy User?    @relation(fields: [performedById], references: [id])
+  createdAt   DateTime @default(now())
+}
+
+model SiteSetting {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String
+  updatedAt DateTime @updatedAt
+}
+
