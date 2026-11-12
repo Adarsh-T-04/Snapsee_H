@@ -70,7 +70,7 @@ export async function POST(req: NextRequest) {
 
     // 5. Asynchronously dispatch notification to admin
     sendEmail({
-      to: process.env.ADMIN_NOTIFICATION_EMAIL || "adarshtripathi969@gmail.com",
+      to: process.env.ADMIN_NOTIFICATION_EMAIL || "snapsee@snapseeh.site",
       subject: `🚨 New Lead [${enquiry.id}] - ${enquiry.businessName} (${enquiry.monthlyBudget})`,
       html: generateAdminNotificationEmail(enquiry),
     }).catch(err => console.error("Admin email failed:", err));

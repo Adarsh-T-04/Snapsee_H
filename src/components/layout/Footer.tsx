@@ -3,15 +3,15 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { 
-  ArrowRight, 
-  Mail, 
-  Phone, 
-  MapPin, 
-  Instagram, 
-  Linkedin, 
-  Twitter, 
-  Youtube, 
+import {
+  ArrowRight,
+  Mail,
+  Phone,
+  MapPin,
+  Instagram,
+  Linkedin,
+  Twitter,
+  Youtube,
   CheckCircle2,
   ShieldCheck
 } from "lucide-react";
@@ -116,7 +116,12 @@ export function Footer() {
               </div>
               <div className="flex items-center gap-2.5">
                 <Mail size={16} className="text-agency-purple" />
-                <a href="mailto:adarshtripathi969@gmail.com" className="hover:text-white">adarshtripathi969@gmail.com</a>
+                <a
+                  href="mailto:snapsee@snapseeh.site"
+                  className="hover:text-white transition-colors"
+                >
+                  snapsee@snapseeh.site
+                </a>
               </div>
               <div className="flex items-center gap-2.5">
                 <Phone size={16} className="text-emerald-400" />

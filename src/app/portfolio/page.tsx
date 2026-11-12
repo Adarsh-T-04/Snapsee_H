@@ -38,13 +38,7 @@ export default function PortfolioPage() {
             Explore how we help modern DTC brands, real estate giants, SaaS companies, and high-ticket service businesses scale through performance marketing.
           </p>
 
-          {/* Transparent Demo Projects Disclaimer Banner */}
-          <div className="mt-8 max-w-2xl mx-auto p-4 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-xs text-amber-300 flex items-start gap-3 text-left">
-            <AlertCircle size={18} className="shrink-0 mt-0.5" />
-            <div>
-              <span className="font-bold">Agency Integrity Notice:</span> All featured case studies showcase realistic demo benchmark models and anonymized campaigns developed under our testing frameworks. We never present fictional results as real client results.
-            </div>
-          </div>
+
 
           {/* Filters */}
           <div className="mt-12 flex flex-wrap items-center justify-center gap-2">

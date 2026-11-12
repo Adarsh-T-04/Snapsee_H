@@ -7,8 +7,8 @@ import { Lock, Mail, ArrowRight, ShieldCheck, AlertCircle, Sparkles } from "luci
 
 export default function AdminLoginPage() {
   const router = useRouter();
-  const [email, setEmail] = useState("adarshtripathi969@gmail.com");
-  const [password, setPassword] = useState("Admin@Snapsee2026!");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -39,10 +39,7 @@ export default function AdminLoginPage() {
     }
   };
 
-  const autofillDemo = () => {
-    setEmail("adarshtripathi969@gmail.com");
-    setPassword("Admin@Snapsee2026!");
-  };
+
 
   return (
     <div className="min-h-screen bg-agency-darker flex items-center justify-center p-4">
@@ -116,25 +113,6 @@ export default function AdminLoginPage() {
           </button>
         </form>
 
-        {/* Quick Demo Credentials Autofill Pill */}
-        <div className="mt-8 pt-6 border-t border-white/10 text-center">
-          <div className="p-3 rounded-xl bg-white/5 border border-white/5 text-[11px] text-zinc-400 space-y-1 text-left">
-            <div className="flex items-center justify-between text-zinc-300 font-semibold">
-              <span className="flex items-center gap-1 text-agency-orange">
-                <Sparkles size={12} /> Pre-configured Demo Access
-              </span>
-              <button
-                type="button"
-                onClick={autofillDemo}
-                className="text-[10px] text-agency-orange underline hover:text-white"
-              >
-                Auto-fill
-              </button>
-            </div>
-            <div>Email: <span className="text-zinc-200">adarshtripathi969@gmail.com</span></div>
-            <div>Password: <span className="text-zinc-200">Admin@Snapsee2026!</span></div>
-          </div>
-        </div>
       </div>
     </div>
   );

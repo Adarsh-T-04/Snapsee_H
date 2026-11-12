@@ -2,17 +2,17 @@
 
 import React, { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
-import { 
-  Send, 
-  CheckCircle2, 
-  AlertCircle, 
-  Phone, 
-  Mail, 
-  MessageCircle, 
-  MapPin, 
-  Clock, 
-  ShieldCheck, 
-  Sparkles 
+import {
+  Send,
+  CheckCircle2,
+  AlertCircle,
+  Phone,
+  Mail,
+  MessageCircle,
+  MapPin,
+  Clock,
+  ShieldCheck,
+  Sparkles
 } from "lucide-react";
 import { trackConversionEvent } from "@/components/ui/Analytics";
 
@@ -175,13 +175,13 @@ function ContactFormInner() {
             </a>
 
             <a
-              href="mailto:adarshtripathi969@gmail.com"
+              href="mailto:snapsee@snapseeh.site"
               className="flex items-center gap-3.5 p-3 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors"
             >
               <Mail size={20} className="text-agency-purple" />
               <div>
                 <div className="text-xs text-zinc-400">Official Inquiries</div>
-                <div className="font-bold text-white">adarshtripathi969@gmail.com</div>
+                <div className="font-bold text-white">snapsee@snapseeh.site</div>
               </div>
             </a>
           </div>
@@ -282,7 +282,7 @@ function ContactFormInner() {
                       required
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
-                      placeholder="e.g. Aryan Sehgal"
+                      placeholder="Adarsh"
                       className="w-full bg-black/50 border border-white/15 rounded-xl px-4 py-3 text-xs sm:text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-agency-orange transition-colors"
                     />
                   </div>
@@ -310,7 +310,7 @@ function ContactFormInner() {
                       required
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      placeholder="e.g. aryan@company.com"
+                      placeholder="snapsee@snapseeh.site"
                       className="w-full bg-black/50 border border-white/15 rounded-xl px-4 py-3 text-xs sm:text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-agency-orange transition-colors"
                     />
                   </div>
@@ -378,19 +378,17 @@ function ContactFormInner() {
                         type="button"
                         key={srv}
                         onClick={() => handleServiceToggle(srv)}
-                        className={`p-3 rounded-xl text-left text-xs font-medium border transition-all flex items-center justify-between ${
-                          isSelected
-                            ? "bg-agency-orange/15 border-agency-orange text-white shadow-md shadow-agency-orange/10"
-                            : "bg-black/40 border-white/10 text-zinc-400 hover:text-white hover:border-white/20"
-                        }`}
+                        className={`p-3 rounded-xl text-left text-xs font-medium border transition-all flex items-center justify-between ${isSelected
+                          ? "bg-agency-orange/15 border-agency-orange text-white shadow-md shadow-agency-orange/10"
+                          : "bg-black/40 border-white/10 text-zinc-400 hover:text-white hover:border-white/20"
+                          }`}
                       >
                         <span>{srv}</span>
                         <div
-                          className={`w-4 h-4 rounded-full border flex items-center justify-center shrink-0 ml-2 ${
-                            isSelected
-                              ? "border-agency-orange bg-agency-orange text-white"
-                              : "border-zinc-600"
-                          }`}
+                          className={`w-4 h-4 rounded-full border flex items-center justify-center shrink-0 ml-2 ${isSelected
+                            ? "border-agency-orange bg-agency-orange text-white"
+                            : "border-zinc-600"
+                            }`}
                         >
                           {isSelected && <CheckCircle2 size={12} />}
                         </div>
@@ -459,11 +457,10 @@ function ContactFormInner() {
                     {(["whatsapp", "email", "phone"] as const).map((method) => (
                       <label
                         key={method}
-                        className={`flex items-center gap-2 px-4 py-2.5 rounded-xl border cursor-pointer text-xs font-medium uppercase tracking-wider transition-colors ${
-                          preferredContact === method
-                            ? "bg-agency-orange/15 border-agency-orange text-white"
-                            : "bg-black/30 border-white/10 text-zinc-400"
-                        }`}
+                        className={`flex items-center gap-2 px-4 py-2.5 rounded-xl border cursor-pointer text-xs font-medium uppercase tracking-wider transition-colors ${preferredContact === method
+                          ? "bg-agency-orange/15 border-agency-orange text-white"
+                          : "bg-black/30 border-white/10 text-zinc-400"
+                          }`}
                       >
                         <input
                           type="radio"
