@@ -1,7 +1,8 @@
+
 import { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://snapsee-agency.vercel.app";
+  const baseUrl = "https://www.snapseeh.site";
 
   return {
     rules: {
@@ -12,4 +13,3 @@ export default function robots(): MetadataRoute.Robots {
     sitemap: `${baseUrl}/sitemap.xml`,
   };
 }
-
