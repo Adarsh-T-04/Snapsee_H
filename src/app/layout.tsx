@@ -8,6 +8,9 @@ import { AnalyticsScripts } from "@/components/ui/Analytics";
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://snapsee-agency.vercel.app"),
+  verification: {
+    google: 'crlWuQXBN4MPrxr6lEsdsxTnmHI9y1IK8d0db-WBXto',
+  },
   title: "Snapsee | Top-Tier Digital Advertising & Performance Marketing Agency",
   description: "We don't just run ads. We build brands that grow. Performance marketing, Meta & Google Ads, viral reels, high-converting websites, and SEO scaling.",
   keywords: [
